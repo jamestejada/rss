@@ -2,3 +2,4 @@ colorama
 feedparser
 python-dateutil
 pytz
+python-dotenv
