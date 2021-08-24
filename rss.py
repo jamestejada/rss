@@ -33,9 +33,8 @@ def show_rss_titles(feed_title:str, url:str):
         if not older:
             print(entry.get('summary'))
             print()
-            if feed_title in ['US Embassy Kabul'] or 'Afghanistan'.lower() in title.lower():
+            if 'US Embassy Kabul' in feed_title or 'Afghanistan'.lower() in title.lower():
                 text_alert(feed_title, title)
-                time.sleep(1)
 
 
 def main():
