@@ -8,14 +8,18 @@ URLS = {
     ('South and Central Asia', 'https://www.state.gov/rss-feed/south-and-central-asia/feed/'),
     ('Counterterrorism', 'https://www.state.gov/rss-feed/counterterrorism/feed/'),
     ('Arms Control / International Security', 'https://www.state.gov/rss-feed/arms-control-and-international-security/feed/'),
-    ('US Embassy Kabul', 'https://af.usembassy.gov/feed')
+    ('US Embassy Kabul', 'https://af.usembassy.gov/feed'),
+    ('The White House', 'https://www.whitehouse.gov/feed')
+    # ('This American Life', 'http://feed.thisamericanlife.org/talpodcast'),
+    # ('Insight', 'https://feeds.feedburner.com/CapitalPublicRadioInsightRSS'),
+    # ('Fresh Air', 'https://feeds.npr.org/381444908/podcast.xml')
 
 }
 
 
 def show_rss_titles(feed_title:str, url:str):
     feed = feedparser.parse(url)
-    print(f'--------{feed_title}--------')
+    print(f'\n--------{feed_title}--------')
     for entry in feed.get('entries'):
         valid_datetime = parse(entry.get('updated'))
         not_newer = (datetime.now(tz=pytz.timezone('US/Pacific')) - valid_datetime) > timedelta(days=1)
@@ -24,6 +28,11 @@ def show_rss_titles(feed_title:str, url:str):
 
         if not not_newer:
             print(entry.get('summary'))
+            # print(entry.get('content'))
+            for link in entry.get('links'):
+                if link.get('type') == 'audio/mpeg':
+                    print(link.get('href'))
+            print()
 
 
 def main():
