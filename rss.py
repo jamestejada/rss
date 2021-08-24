@@ -21,23 +21,19 @@ URLS = {
 def show_rss_titles(feed_title:str, url:str):
     feed = feedparser.parse(url)
     print(f'\n--------{feed_title}--------')
-    new_list = []
+
     for entry in feed.get('entries'):
         valid_datetime = parse(entry.get('updated'))
-        not_newer = (datetime.now(tz=pytz.timezone('US/Pacific')) - valid_datetime) > timedelta(days=1)
-        color = Fore.LIGHTCYAN_EX if not_newer else Fore.YELLOW
+        older = (datetime.now(tz=pytz.timezone('US/Pacific')) - valid_datetime) > timedelta(hours=1)
+        color = Fore.LIGHTCYAN_EX if older else Fore.YELLOW
         title = entry.get('title')
         print(valid_datetime.strftime('%c'), '-', color, title, Style.RESET_ALL)
 
 
-        if not not_newer:
+        if not older:
             print(entry.get('summary'))
-            # print(entry.get('content'))
-            for link in entry.get('links'):
-                if link.get('type') == 'audio/mpeg':
-                    print(link.get('href'))
             print()
-            if feed_title in ['US Embassy Kabul']:
+            if feed_title in ['US Embassy Kabul'] or 'Afghanistan'.lower() in title.lower():
                 text_alert(feed_title, title)
                 time.sleep(1)
 
