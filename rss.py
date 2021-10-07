@@ -12,9 +12,6 @@ URLS = {
     ('Arms Control / International Security', 'https://www.state.gov/rss-feed/arms-control-and-international-security/feed/'),
     ('US Embassy Kabul', 'https://af.usembassy.gov/feed'),
     ('The White House', 'https://www.whitehouse.gov/feed')
-    # ('This American Life', 'http://feed.thisamericanlife.org/talpodcast'),
-    # ('Insight', 'https://feeds.feedburner.com/CapitalPublicRadioInsightRSS'),
-    # ('Fresh Air', 'https://feeds.npr.org/381444908/podcast.xml')
 }
 
 

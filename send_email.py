@@ -25,7 +25,7 @@ def get_server():
 def text_alert(rss_feed: str, title: str):
     server = get_server()
     server.sendmail(
-        FROM_ADDRESS, 
-        [TO_ADDRESS],
-        f'Subject: RSS Update - {rss_feed}\n\n{title}'.encode('utf-8')
+        from_addr=FROM_ADDRESS, 
+        to_addrs=[TO_ADDRESS],
+        msg=f'Subject: RSS Update - {rss_feed}\n\n{title}'.encode('utf-8')
         )
